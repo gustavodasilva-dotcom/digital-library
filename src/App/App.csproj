@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Lendings\Modules.Lendings.Infrastructure\Modules.Lendings.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Books\Modules.Books.Infrastructure\Modules.Books.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Books\Modules.Books.Application\Modules.Books.Application.csproj" />
+  </ItemGroup>
+
+</Project>
