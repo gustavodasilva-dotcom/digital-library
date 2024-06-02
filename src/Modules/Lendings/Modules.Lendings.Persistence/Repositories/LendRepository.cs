@@ -9,4 +9,9 @@ internal sealed class LendRepository : RepositoryBase<Lend>, ILendRepository
         : base(dbContext)
     {
     }
+
+    public bool IsLent(Guid bookId)
+    {
+        return Get(l => l.BookId == bookId && l.EndDate > DateTime.Now) is not null;
+    }
 }

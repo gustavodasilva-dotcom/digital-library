@@ -15,7 +15,9 @@ public class Book : Entity
         int totalPages,
         string isbn10,
         string isbn13,
-        bool isAvailable) : base(id)
+        bool isAvailable,
+        Guid authorId,
+        DateTime createdDate) : base(id, createdDate)
     {
         Title = title;
         PublicationDate = publicationDate;
@@ -23,6 +25,7 @@ public class Book : Entity
         Isbn10 = isbn10;
         Isbn13 = isbn13;
         IsAvailable = isAvailable;
+        AuthorId = authorId;
     }
 
     public string Title { get; private set; }
@@ -37,23 +40,38 @@ public class Book : Entity
 
     public bool IsAvailable { get; private set; }
 
+    public Guid AuthorId { get; private set; }
+
     public IReadOnlySet<BookLend> Lends => _lends;
+
+    public override IEnumerable<object> GetAtomicValues()
+    {
+        yield return Title;
+        yield return PublicationDate;
+        yield return TotalPages;
+        yield return Isbn10;
+        yield return Isbn13;
+        yield return AuthorId;
+    }
 
     public static Book Create(
         string title,
         DateTime publicationDate,
         int totalPages,
         string isbn10,
-        string isbn13)
+        string isbn13,
+        Guid authorId)
     {
         var book = new Book(
-            Guid.NewGuid(),
+            id: Guid.NewGuid(),
             title.Trim(),
             publicationDate,
             totalPages,
             isbn10.Trim(),
             isbn13.Trim(),
-            isAvailable: true);
+            isAvailable: true,
+            authorId,
+            createdDate: DateTime.Now);
 
         return book;
     }

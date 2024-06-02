@@ -14,11 +14,20 @@ internal class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity 
         _dbContext = dbContext;
     }
 
-    public virtual List<TEntity> Get(int page = 0, int size = 10)
+    public virtual List<TEntity> GetAll(int page = 0, int size = 10)
     {
-        return _dbContext.Set<TEntity>().AsNoTracking()
+        return _dbContext.Set<TEntity>()
+            .AsNoTracking()
             .Skip((page - 1) * size)
             .Take(size)
+            .ToList();
+    }
+
+    public virtual List<TEntity> GetAll(Expression<Func<TEntity, bool>> expression)
+    {
+        return _dbContext.Set<TEntity>()
+            .AsNoTracking()
+            .Where(expression)
             .ToList();
     }
 

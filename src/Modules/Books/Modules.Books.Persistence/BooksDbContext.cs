@@ -19,4 +19,6 @@ public class BooksDbContext : DbContext
     public DbSet<Book> Books { get; set; }
 
     public DbSet<BookLend> BookLends { get; set; }
+
+    public DbSet<Author> Authors { get; set; }
 }

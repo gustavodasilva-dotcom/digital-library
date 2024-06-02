@@ -4,4 +4,5 @@ namespace DigitalLibrary.Modules.Lendings.Domain.Abstractions;
 
 public interface ILendRepository : IRepositoryBase<Lend>
 {
+    bool IsLent(Guid bookId);
 }

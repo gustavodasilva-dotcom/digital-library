@@ -8,4 +8,5 @@ public sealed record RegisterBookCommand(
     DateTime PublicationDate,
     int TotalPages,
     string Isbn10,
-    string Isbn13) : IRequest<Result<Guid, Error>>;
+    string Isbn13,
+    Guid AuthorId) : IRequest<Result<Guid, Error>>;

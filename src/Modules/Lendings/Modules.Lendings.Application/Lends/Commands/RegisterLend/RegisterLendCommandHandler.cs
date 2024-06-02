@@ -21,7 +21,7 @@ internal sealed class RegisterLendCommandHandler
         RegisterLendCommand request,
         CancellationToken cancellationToken)
     {
-        if (_lendRepository.Get(l => l.BookId == request.BookId && l.EndDate > DateTime.Now) != null)
+        if (_lendRepository.IsLent(request.BookId))
         {
             return new Error("RegisterLend.BookIsLent", "This book has already been lent");
         }

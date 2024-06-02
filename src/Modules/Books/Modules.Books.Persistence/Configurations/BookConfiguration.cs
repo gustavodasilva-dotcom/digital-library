@@ -5,7 +5,7 @@ using Modules.Books.Persistence.Constants;
 
 namespace DigitalLibrary.Modules.Books.Persistence.Configurations;
 
-internal sealed class BookConfigurations : IEntityTypeConfiguration<Book>
+internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
 {
     public void Configure(EntityTypeBuilder<Book> builder)
     {

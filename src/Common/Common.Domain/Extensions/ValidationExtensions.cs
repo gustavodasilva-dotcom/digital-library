@@ -17,7 +17,7 @@ public static class ValidationExtensions
                 validateAllProperties: true))
         {
             return new Error(
-                "PayloadValidation",
+                "PayloadValidation.InvalidPayload",
                 string.Join("\n", validationResults.Select(v => v.ErrorMessage)));
         }
 

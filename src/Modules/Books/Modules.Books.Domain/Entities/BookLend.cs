@@ -12,7 +12,8 @@ public class BookLend : Entity
         Guid lendId,
         DateTime startLendDate,
         DateTime endLendDate,
-        DateTime lendDate) : base(id)
+        DateTime lendDate,
+        DateTime createdDate) : base(id, createdDate)
     {
         BookId = bookId;
         LendId = lendId;
@@ -31,6 +32,15 @@ public class BookLend : Entity
 
     public DateTime LendDate { get; private set; }
 
+    public override IEnumerable<object> GetAtomicValues()
+    {
+        yield return BookId;
+        yield return LendId;
+        yield return StartLendDate;
+        yield return EndLendDate;
+        yield return LendDate;
+    }
+
     public static BookLend Create(
         Guid bookId,
         Guid lendId,
@@ -39,12 +49,13 @@ public class BookLend : Entity
         DateTime lendDate)
     {
         var bookLend = new BookLend(
-            Guid.NewGuid(),
+            id: Guid.NewGuid(),
             bookId,
             lendId,
             startLendDate,
             endLendDate,
-            lendDate);
+            lendDate,
+            createdDate: DateTime.Now);
 
         return bookLend;
     }

@@ -5,7 +5,9 @@ namespace DigitalLibrary.Modules.Books.Domain.Abstractions;
 
 public interface IRepositoryBase<TEntity> where TEntity : Entity
 {
-    List<TEntity> Get(int page = 0, int size = 10);
+    List<TEntity> GetAll(int page = 0, int size = 10);
+
+    List<TEntity> GetAll(Expression<Func<TEntity, bool>> expression);
     
     TEntity? Get(Expression<Func<TEntity, bool>> expression);
     
