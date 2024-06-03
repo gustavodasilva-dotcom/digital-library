@@ -4,9 +4,9 @@ namespace DigitalLibrary.Modules.Lendings.Persistence;
 
 internal sealed class UnitOfWork : IUnitOfWork
 {
-    private readonly LendingDbContext _dbContext;
+    private readonly LendingsDbContext _dbContext;
 
-    public UnitOfWork(LendingDbContext dbContext)
+    public UnitOfWork(LendingsDbContext dbContext)
     {
         _dbContext = dbContext;
     }

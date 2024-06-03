@@ -9,5 +9,7 @@ public class BookProfiles : Profile
     public BookProfiles()
     {
         CreateMap<Book, BookResponse>();
+
+        CreateMap<BookAuthor, BookAuthorResponse>();
     }
 }

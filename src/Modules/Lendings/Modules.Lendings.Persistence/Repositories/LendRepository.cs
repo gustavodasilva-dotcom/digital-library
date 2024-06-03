@@ -5,7 +5,7 @@ namespace DigitalLibrary.Modules.Lendings.Persistence.Repositories;
 
 internal sealed class LendRepository : RepositoryBase<Lend>, ILendRepository
 {
-    public LendRepository(LendingDbContext dbContext)
+    public LendRepository(LendingsDbContext dbContext)
         : base(dbContext)
     {
     }

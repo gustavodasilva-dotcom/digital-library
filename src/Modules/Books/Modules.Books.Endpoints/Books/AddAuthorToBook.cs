@@ -1,6 +1,6 @@
 using DigitalLibrary.Common.Domain.Extensions;
 using DigitalLibrary.Common.Infrastructure.Endpoints;
-using DigitalLibrary.Modules.Books.Application.Commands.RegisterBook;
+using DigitalLibrary.Modules.Books.Application.Commands.AddAuthorToBook;
 using DigitalLibrary.Modules.Books.Endpoints.Contracts;
 using DigitalLibrary.Modules.Books.Endpoints.Routes;
 using MediatR;
@@ -11,12 +11,12 @@ using Microsoft.AspNetCore.Routing;
 
 namespace DigitalLibrary.Modules.Books.Endpoints;
 
-public class RegisterBook : IEndpoint
+public class AddAuthorToBook : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost(BooksRoutes.Register, async (
-            [FromBody] RegisterBookRequest request,
+        app.MapPut(BooksRoutes.AddAuthorToBook, async (
+            [FromBody] AddAuthorToBookRequest request,
             ISender sender) =>
         {
             var validationResult = request.ValidatePayload();
@@ -26,13 +26,10 @@ public class RegisterBook : IEndpoint
                 return Results.BadRequest(validationResult.Error);
             }
 
-            var command = new RegisterBookCommand(
-                request.Title,
-                request.PublicationDate,
-                request.TotalPages,
-                request.Edition,
-                request.Isbn10,
-                request.Isbn13);
+            var command = new AddAuthorToBookCommand(
+                request.BookId,
+                request.AuthorId,
+                request.AuthorType);
 
             var result = await sender.Send(command);
 
@@ -41,7 +38,7 @@ public class RegisterBook : IEndpoint
                 return Results.BadRequest(result.Error);
             }
 
-            return Results.Created(string.Empty, result.Value);
+            return Results.Ok(result.Value);
         })
         .WithTags(BooksRoutes.Tag);
     }

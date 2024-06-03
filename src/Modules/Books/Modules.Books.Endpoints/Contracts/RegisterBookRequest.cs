@@ -21,6 +21,11 @@ internal sealed class RegisterBookRequest
     public int TotalPages { get; set; }
 
     [Required]
+    [MaxLength(50)]
+    [JsonPropertyName("edition")]
+    public string Edition { get; set; } = string.Empty;
+
+    [Required]
     [MaxLength(13)]
     [JsonPropertyName("isbn_10")]
     public string Isbn10 { get; set; } = string.Empty;
@@ -29,8 +34,4 @@ internal sealed class RegisterBookRequest
     [MaxLength(14)]
     [JsonPropertyName("isbn_13")]
     public string Isbn13 { get; set; } = string.Empty;
-
-    [Required]
-    [JsonPropertyName("author_id")]
-    public Guid AuthorId { get; set; }
 }

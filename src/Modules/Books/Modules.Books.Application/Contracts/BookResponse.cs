@@ -25,6 +25,9 @@ public class BookResponse
     [JsonPropertyName("is_available")]
     public bool IsAvailable { get; set; }
 
+    [JsonPropertyName("authors")]
+    public List<BookAuthorResponse> Authors { get; set; } = [];
+
     [JsonPropertyName("created_date")]
     public DateTime CreatedDate { get; set; }
 }

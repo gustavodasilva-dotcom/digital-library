@@ -9,16 +9,13 @@ internal sealed class RegisterBookCommandHandler
     : IRequestHandler<RegisterBookCommand, Result<Guid, Error>>
 {
     private readonly IBookRepository _bookRepository;
-    private readonly IAuthorRepository _authorRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public RegisterBookCommandHandler(
         IBookRepository bookRepository,
-        IAuthorRepository authorRepository,
         IUnitOfWork unitOfWork)
     {
         _bookRepository = bookRepository;
-        _authorRepository = authorRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -40,33 +37,15 @@ internal sealed class RegisterBookCommandHandler
                 $"There's already a book registered with the ISBN-13 {request.Isbn13}");
         }
 
-        var author = _authorRepository.Get(a => a.Id == request.AuthorId);
-
-        if (author is null)
-        {
-            return new Error(
-                "RegisterBook.AuthorNotFound",
-                $"No author was found with the id {request.AuthorId}");
-        }
-
         var book = Book.Create(
             request.Title,
             request.PublicationDate,
             request.TotalPages,
+            request.Edition,
             request.Isbn10,
-            request.Isbn13,
-            request.AuthorId);
-
-        var addBookResult = author.AddBook(book);
-        
-        if (addBookResult.IsFailure)
-        {
-            return addBookResult.Error!;
-        }
+            request.Isbn13);
 
         _bookRepository.Add(book);
-
-        _authorRepository.Update(author);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

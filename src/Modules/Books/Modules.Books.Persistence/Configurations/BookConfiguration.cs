@@ -16,16 +16,22 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
                 sql: $"{nameof(Book.TotalPages)} > 0");
         });
 
-        builder.HasKey(prop => prop.Id);
+        builder.HasKey(p => p.Id);
 
-        builder.Property(prop => prop.Title).HasMaxLength(320);
+        builder.Property(p => p.Title).HasMaxLength(320);
 
-        builder.Property(prop => prop.Isbn10).HasMaxLength(13);
+        builder.Property(p => p.Edition).HasMaxLength(50);
 
-        builder.Property(prop => prop.Isbn13).HasMaxLength(14);
+        builder.Property(p => p.Isbn10).HasMaxLength(13);
 
-        builder.HasMany(prop => prop.Lends)
+        builder.Property(p => p.Isbn13).HasMaxLength(14);
+
+        builder.HasMany(p => p.Lends)
             .WithOne()
-            .HasForeignKey(lend => lend.BookId);
+            .HasForeignKey(l => l.BookId);
+
+        builder.HasMany(p => p.Authors)
+            .WithOne()
+            .HasForeignKey(a => a.BookId);
     }
 }

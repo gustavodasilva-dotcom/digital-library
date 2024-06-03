@@ -23,7 +23,7 @@ internal sealed class GetBooksQueryHandler
         GetBooksByAuthorIdQuery request,
         CancellationToken cancellationToken)
     {
-        var books = _bookRepository.GetAll(b => b.AuthorId == request.AuthorId);
+        var books = _bookRepository.GetAll(b => b.Authors.Any(a => a.AuthorId == request.AuthorId));
 
         var result = _mapper.Map<IEnumerable<BookResponse>>(books);
 

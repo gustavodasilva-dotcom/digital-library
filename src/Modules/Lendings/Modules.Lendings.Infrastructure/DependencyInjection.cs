@@ -1,15 +1,18 @@
 using DigitalLibrary.Modules.Lendings.Application;
 using DigitalLibrary.Modules.Lendings.Endpoints;
 using DigitalLibrary.Modules.Lendings.Persistence;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Lendings.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddLending(this IServiceCollection services)
+    public static IServiceCollection AddLending(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        services.AddPersistence();
+        services.AddPersistence(configuration);
         services.AddApplication();
         services.AddEndpoints();
 

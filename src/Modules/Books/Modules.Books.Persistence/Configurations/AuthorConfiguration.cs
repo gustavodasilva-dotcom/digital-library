@@ -11,12 +11,12 @@ internal sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
     {
         builder.ToTable(DatabaseConstants.AuthorsTable);
 
-        builder.HasKey(prop => prop.Id);
+        builder.HasKey(p => p.Id);
 
-        builder.Property(prop => prop.Name).HasMaxLength(200);
+        builder.Property(p => p.Name).HasMaxLength(200);
 
-        builder.HasMany(prop => prop.Books)
+        builder.HasMany(p => p.Books)
             .WithOne()
-            .HasForeignKey(book => book.AuthorId);
+            .HasForeignKey(b => b.AuthorId);
     }
 }

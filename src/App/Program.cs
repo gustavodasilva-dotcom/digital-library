@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddLending();
-builder.Services.AddBooks();
+builder.Services.AddLending(builder.Configuration);
+builder.Services.AddBooks(builder.Configuration);
 
 builder.Services.AddMassTransit(config =>
 {

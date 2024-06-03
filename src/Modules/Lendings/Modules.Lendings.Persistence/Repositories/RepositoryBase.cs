@@ -7,9 +7,9 @@ namespace DigitalLibrary.Modules.Lendings.Persistence.Repositories;
 
 internal class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : Entity
 {
-    private readonly LendingDbContext _dbContext;
+    private readonly LendingsDbContext _dbContext;
 
-    public RepositoryBase(LendingDbContext dbContext)
+    public RepositoryBase(LendingsDbContext dbContext)
     {
         _dbContext = dbContext;
     }

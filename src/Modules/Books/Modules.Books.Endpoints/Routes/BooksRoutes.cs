@@ -7,4 +7,6 @@ internal sealed class BooksRoutes
     public const string Register = "api/books";
 
     public const string GetByAuthor = "api/books/{authorId:guid}";
+
+    public const string AddAuthorToBook = "api/books/add-author";
 }

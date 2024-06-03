@@ -5,11 +5,11 @@ using Modules.Books.Persistence.Constants;
 
 namespace DigitalLibrary.Modules.Books.Persistence.Configurations;
 
-internal sealed class BookLendConfiguration : IEntityTypeConfiguration<BookLend>
+internal sealed class BookAuthorConfiguration : IEntityTypeConfiguration<BookAuthor>
 {
-    public void Configure(EntityTypeBuilder<BookLend> builder)
+    public void Configure(EntityTypeBuilder<BookAuthor> builder)
     {
-        builder.ToTable(DatabaseConstants.BookLendsTable);
+        builder.ToTable(DatabaseConstants.BookAuthorsTable);
 
         builder.Property(p => p.Id);
     }

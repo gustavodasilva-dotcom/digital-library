@@ -1,13 +1,33 @@
+using System.Linq.Expressions;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
 using DigitalLibrary.Modules.Books.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalLibrary.Modules.Books.Persistence.Repositories;
 
 internal sealed class BookRepository : RepositoryBase<Book>, IBookRepository
 {
+    private readonly BooksDbContext _dbContext;
+
     public BookRepository(BooksDbContext dbContext)
         : base(dbContext)
     {
+        _dbContext = dbContext;
+    }
+
+    public override List<Book> GetAll(Expression<Func<Book, bool>> expression)
+    {
+        return _dbContext.Books
+            .Include(b => b.Authors)
+            .Where(expression)
+            .ToList();
+    }
+
+    public override Book? Get(Expression<Func<Book, bool>> expression)
+    {
+        return _dbContext.Books
+            .Include(b => b.Authors)
+            .SingleOrDefault(expression);
     }
 
     public Book? GetByIsbn10(string isbn10)

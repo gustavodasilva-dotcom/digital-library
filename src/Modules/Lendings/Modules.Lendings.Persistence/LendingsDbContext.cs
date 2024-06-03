@@ -1,15 +1,16 @@
 ﻿using DigitalLibrary.Modules.Lendings.Domain.Entities;
+using DigitalLibrary.Modules.Lendings.Persistence.Constants;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalLibrary.Modules.Lendings.Persistence;
 
-public class LendingDbContext : DbContext
+public class LendingsDbContext : DbContext
 {
     private readonly IPublisher _publisher;
 
-    public LendingDbContext(
-        DbContextOptions<LendingDbContext> options,
+    public LendingsDbContext(
+        DbContextOptions<LendingsDbContext> options,
         IPublisher publisher) : base(options)
     {
         _publisher = publisher;
@@ -27,6 +28,14 @@ public class LendingDbContext : DbContext
         {
             await _publisher.Publish(domainEvent);
         }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.HasDefaultSchema(DatabaseConstants.Schema);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(LendingsDbContext).Assembly);
     }
 
     public override async Task<int> SaveChangesAsync(
