@@ -1,3 +1,3 @@
 namespace DigitalLibrary.Modules.Lendings.IntegrationEvents.Contracts;
 
-public sealed record LendConcludedIntegrationEvent(Guid BookId);
+public sealed record LendFinishedIntegrationEvent(Guid BookId);

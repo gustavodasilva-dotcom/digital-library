@@ -5,18 +5,18 @@ using MediatR;
 
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.ConcludeLend;
 
-internal sealed class BookLendConcludedDomainEventHandler
-    : INotificationHandler<BookLendConcludedDomainEvent>
+internal sealed class BookLendCancelledDomainEventHandler
+    : INotificationHandler<BookLendCancelledDomainEvent>
 {
     private readonly IBus _bus;
 
-    public BookLendConcludedDomainEventHandler(IBus bus)
+    public BookLendCancelledDomainEventHandler(IBus bus)
     {
         _bus = bus;
     }
 
     public Task Handle(
-        BookLendConcludedDomainEvent notification,
+        BookLendCancelledDomainEvent notification,
         CancellationToken cancellationToken)
     {
         return _bus.Publish(

@@ -60,6 +60,11 @@ public class Lend : Entity
         RaiseDomainEvent(new BookLendConcludedDomainEvent(BookId));
     }
 
+    private void CreateBookLendCancelledDomainEvent()
+    {
+        RaiseDomainEvent(new BookLendCancelledDomainEvent(BookId));
+    }
+
     public static Lend Create(Guid bookId, DateTime startDate, DateTime endDate)
     {
         var lend = new Lend(
@@ -89,6 +94,26 @@ public class Lend : Entity
         ConcludedDate = DateTime.Now;
 
         CreateBookLendConcludedDomainEvent();
+
+        return this;
+    }
+
+    public Result<Lend, Error> Cancel()
+    {
+        if (Status == LendStatuses.Concluded || Status == LendStatuses.Cancelled)
+        {
+            return new Error(
+                "ConcludeLend.ConcludedOrCancelled",
+                "The lend is concluded or cancelled");
+        }
+
+        if (Status != LendStatuses.OnQueue)
+        {
+            CreateBookLendCancelledDomainEvent();
+        }
+
+        Status = LendStatuses.Cancelled;
+        CancelledDate = DateTime.Now;
 
         return this;
     }

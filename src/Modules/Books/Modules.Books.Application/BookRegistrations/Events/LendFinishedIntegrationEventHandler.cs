@@ -5,13 +5,13 @@ using MassTransit;
 
 namespace DigitalLibrary.Modules.Books.Application.BookRegistrations.Events;
 
-public sealed class LendConcludedIntegrationEventHandler
-    : IConsumer<LendConcludedIntegrationEvent>
+public sealed class LendFinishedIntegrationEventHandler
+    : IConsumer<LendFinishedIntegrationEvent>
 {
     private readonly IBookRepository _bookRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public LendConcludedIntegrationEventHandler(
+    public LendFinishedIntegrationEventHandler(
         IBookRepository bookRepository,
         IUnitOfWork unitOfWork)
     {
@@ -19,9 +19,9 @@ public sealed class LendConcludedIntegrationEventHandler
         _unitOfWork = unitOfWork;
     }
 
-    public async Task Consume(ConsumeContext<LendConcludedIntegrationEvent> context)
+    public async Task Consume(ConsumeContext<LendFinishedIntegrationEvent> context)
     {
-        LendConcludedIntegrationEvent message = context.Message;
+        LendFinishedIntegrationEvent message = context.Message;
 
         var book = _bookRepository.Get(b => b.Id == message.BookId);
 
