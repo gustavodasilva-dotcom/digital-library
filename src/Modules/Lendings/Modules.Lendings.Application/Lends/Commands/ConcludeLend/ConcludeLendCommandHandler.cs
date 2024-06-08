@@ -36,7 +36,12 @@ internal sealed class ConcludeLendCommandHandler
                 "No lend was found for the informed code");
         }
 
-        lend.Conclude();
+        var concludeResult = lend.Conclude();
+
+        if (concludeResult.IsFailure)
+        {
+            return concludeResult.Error!;
+        }
 
         _lendRepository.Update(lend);
 
