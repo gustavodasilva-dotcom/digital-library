@@ -5,4 +5,6 @@ internal static class LendingsRoutes
     public const string Tag = "lendings";
 
     public const string Register = "api/lendings";
+
+    public const string Conclude = "api/lendings/{code}";
 }

@@ -19,6 +19,7 @@ internal sealed class BookRepository : RepositoryBase<Book>, IBookRepository
     {
         return _dbContext.Books
             .Include(b => b.Authors)
+            .Include(b => b.Lends)
             .Where(expression)
             .ToList();
     }
@@ -27,6 +28,7 @@ internal sealed class BookRepository : RepositoryBase<Book>, IBookRepository
     {
         return _dbContext.Books
             .Include(b => b.Authors)
+            .Include(b => b.Lends)
             .SingleOrDefault(expression);
     }
 

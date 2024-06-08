@@ -16,6 +16,9 @@ public class BookResponse
     [JsonPropertyName("total_pages")]
     public int TotalPages { get; set; }
 
+    [JsonPropertyName("edition")]
+    public string Edition { get; set; } = string.Empty;
+
     [JsonPropertyName("isbn_10")]
     public string Isbn10 { get; set; } = string.Empty;
 

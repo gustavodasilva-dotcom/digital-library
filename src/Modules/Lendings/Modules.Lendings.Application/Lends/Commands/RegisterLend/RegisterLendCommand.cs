@@ -1,4 +1,5 @@
 using DigitalLibrary.Common.Domain.Shared;
+using DigitalLibrary.Modules.Lendings.Application.Contracts;
 using MediatR;
 
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLend;
@@ -6,4 +7,4 @@ namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLen
 public sealed record RegisterLendCommand(
     Guid BookId,
     DateTime StartDate,
-    DateTime EndDate) : IRequest<Result<Guid, Error>>;
+    DateTime EndDate) : IRequest<Result<LendResponse, Error>>;

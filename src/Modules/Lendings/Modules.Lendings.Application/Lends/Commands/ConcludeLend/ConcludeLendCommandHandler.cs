@@ -2,19 +2,18 @@ using AutoMapper;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Lendings.Application.Contracts;
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
-using DigitalLibrary.Modules.Lendings.Domain.Entities;
 using MediatR;
 
-namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLend;
+namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.ConcludeLend;
 
-internal sealed class RegisterLendCommandHandler
-    : IRequestHandler<RegisterLendCommand, Result<LendResponse, Error>>
+internal sealed class ConcludeLendCommandHandler
+    : IRequestHandler<ConcludeLendCommand, Result<LendResponse, Error>>
 {
     private readonly ILendRepository _lendRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public RegisterLendCommandHandler(
+    public ConcludeLendCommandHandler(
         ILendRepository lendRepository,
         IUnitOfWork unitOfWork,
         IMapper mapper)
@@ -25,17 +24,21 @@ internal sealed class RegisterLendCommandHandler
     }
 
     public async Task<Result<LendResponse, Error>> Handle(
-        RegisterLendCommand request,
+        ConcludeLendCommand request,
         CancellationToken cancellationToken)
     {
-        if (_lendRepository.IsLent(request.BookId))
+        var lend = _lendRepository.Get(l => l.Code == request.Code.Trim());
+
+        if (lend is null)
         {
-            return new Error("RegisterLend.BookIsLent", "This book has already been lent");
+            return new Error(
+                "ConcludeLend.NotFound",
+                "No lend was found for the informed code");
         }
 
-        var lend = Lend.Create(request.BookId, request.StartDate, request.EndDate);
+        lend.Conclude();
 
-        _lendRepository.Add(lend);
+        _lendRepository.Update(lend);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

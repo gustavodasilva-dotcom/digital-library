@@ -12,5 +12,9 @@ internal sealed class LendConfiguration : IEntityTypeConfiguration<Lend>
         builder.ToTable(DatabaseConstants.LendsTable);
 
         builder.HasKey(p => p.Id);
+
+        builder.Property(p => p.Code).HasMaxLength(10);
+
+        builder.HasIndex(p => p.Code).IsUnique();
     }
 }

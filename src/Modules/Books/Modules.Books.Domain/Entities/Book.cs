@@ -81,6 +81,11 @@ public class Book : Entity
         return book;
     }
 
+    public void TurnBookIntoAvailable()
+    {
+        IsAvailable = true;
+    }
+
     public void TurnBookIntoUnavailable()
     {
         IsAvailable = false;

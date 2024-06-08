@@ -1,5 +1,6 @@
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
 using DigitalLibrary.Modules.Lendings.Domain.Entities;
+using DigitalLibrary.Modules.Lendings.Domain.Enumerations;
 
 namespace DigitalLibrary.Modules.Lendings.Persistence.Repositories;
 
@@ -12,6 +13,9 @@ internal sealed class LendRepository : RepositoryBase<Lend>, ILendRepository
 
     public bool IsLent(Guid bookId)
     {
-        return Get(l => l.BookId == bookId && l.EndDate > DateTime.Now) is not null;
+        var bookLent = Get(l => l.BookId == bookId &&
+            (l.Status == LendStatuses.Open || l.Status == LendStatuses.Late));
+
+        return bookLent is not null;
     }
 }
