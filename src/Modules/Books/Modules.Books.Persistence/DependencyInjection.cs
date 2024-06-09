@@ -20,6 +20,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IBookAuthorRepository, BookAuthorRepository>();
         services.AddScoped<IBookLendRepository, BookLendRepository>();
+        services.AddScoped<IPublisherRepository, PublisherRepository>();
 
         return services;
     }

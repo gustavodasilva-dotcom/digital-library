@@ -3,14 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace DigitalLibrary.Modules.Books.Endpoints.Contracts;
 
-internal sealed class RegisterAuthorRequest
+internal sealed class RegisterPublisherRequest
 {
     [Required]
     [MaxLength(200)]
     [JsonPropertyName("name")]
     public string Name { get; set; } = string.Empty;
-
-    [Required]
-    [JsonPropertyName("about")]
-    public string About { get; set; } = string.Empty;
 }
