@@ -8,6 +8,6 @@ public class LendProfiles : Profile
 {
     public LendProfiles()
     {
-        CreateMap<Lend, LendResponse>();
+        CreateMap<Lend, LendContracts.LendResponse>();
     }
 }

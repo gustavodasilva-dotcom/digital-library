@@ -7,4 +7,4 @@ namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLen
 public sealed record RegisterLendCommand(
     Guid BookId,
     DateTime StartDate,
-    DateTime EndDate) : IRequest<Result<LendResponse, Error>>;
+    DateTime EndDate) : IRequest<Result<LendContracts.LendResponse, Error>>;

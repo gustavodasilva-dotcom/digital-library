@@ -1,8 +1,12 @@
 
+using DigitalLibrary.Common.Domain.Shared;
+
 namespace DigitalLibrary.Modules.Books.Domain.Entities;
 
 public class Publisher : Entity
 {
+    private readonly HashSet<Book> _books = [];
+
     private Publisher()
     {
     }
@@ -14,6 +18,8 @@ public class Publisher : Entity
     }
 
     public string Name { get; private set; }
+
+    public IReadOnlySet<Book> Books => _books;
 
     public override IEnumerable<object> GetAtomicValues()
     {
@@ -28,5 +34,19 @@ public class Publisher : Entity
             createdDate: DateTime.Now);
 
         return publisher;
+    }
+
+    public Result<Book, Error> AddBook(Book book)
+    {
+        if (_books.Any(b => b.Equals(book)))
+        {
+            return new Error(
+                "AddBook.PublisherAlreadyHasBook",
+                "It's not possible to add repetead books to a publisher");
+        }
+
+        _books.Add(book);
+
+        return book;
     }
 }

@@ -5,4 +5,4 @@ using MediatR;
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.CancelLend;
 
 public sealed record CancelLendCommand(string Code)
-    : IRequest<Result<LendResponse, Error>>;
+    : IRequest<Result<LendContracts.LendResponse, Error>>;

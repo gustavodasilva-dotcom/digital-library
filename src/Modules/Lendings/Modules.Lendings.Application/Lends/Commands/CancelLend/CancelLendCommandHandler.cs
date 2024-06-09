@@ -7,7 +7,7 @@ using MediatR;
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.CancelLend;
 
 internal sealed class CancelLendCommandHandler
-    : IRequestHandler<CancelLendCommand, Result<LendResponse, Error>>
+    : IRequestHandler<CancelLendCommand, Result<LendContracts.LendResponse, Error>>
 {
     private readonly ILendRepository _lendRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +23,7 @@ internal sealed class CancelLendCommandHandler
         _mapper = mapper;
     }
 
-    public async Task<Result<LendResponse, Error>> Handle(
+    public async Task<Result<LendContracts.LendResponse, Error>> Handle(
         CancelLendCommand request,
         CancellationToken cancellationToken)
     {
@@ -47,7 +47,7 @@ internal sealed class CancelLendCommandHandler
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var response = _mapper.Map<LendResponse>(lend);
+        var response = _mapper.Map<LendContracts.LendResponse>(lend);
 
         return response;
     }

@@ -4,6 +4,8 @@ namespace DigitalLibrary.Modules.Books.Domain.Entities;
 
 public class Book : Entity
 {
+    private readonly Publisher _publisher;
+
     private readonly HashSet<BookAuthor> _authors = [];
     private readonly HashSet<BookLend> _lends = [];
 
@@ -20,6 +22,7 @@ public class Book : Entity
         string isbn10,
         string isbn13,
         bool isAvailable,
+        Guid publisherId,
         DateTime createdDate) : base(id, createdDate)
     {
         Title = title;
@@ -29,6 +32,7 @@ public class Book : Entity
         Isbn10 = isbn10;
         Isbn13 = isbn13;
         IsAvailable = isAvailable;
+        PublisherId = publisherId;
     }
 
     public string Title { get; private set; }
@@ -44,6 +48,10 @@ public class Book : Entity
     public string Isbn13 { get; private set; }
 
     public bool IsAvailable { get; private set; }
+
+    public Guid PublisherId { get; private set; }
+
+    public Publisher Publisher => _publisher;
 
     public virtual IReadOnlySet<BookAuthor> Authors => _authors;
 
@@ -65,7 +73,8 @@ public class Book : Entity
         int totalPages,
         string edition,
         string isbn10,
-        string isbn13)
+        string isbn13,
+        Guid publisherId)
     {
         var book = new Book(
             id: Guid.NewGuid(),
@@ -76,6 +85,7 @@ public class Book : Entity
             isbn10.Trim(),
             isbn13.Trim(),
             isAvailable: true,
+            publisherId,
             createdDate: DateTime.Now);
 
         return book;

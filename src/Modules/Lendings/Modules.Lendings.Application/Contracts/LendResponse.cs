@@ -3,32 +3,35 @@ using DigitalLibrary.Modules.Lendings.Domain.Enumerations;
 
 namespace DigitalLibrary.Modules.Lendings.Application.Contracts;
 
-public class LendResponse
+public class LendContracts
 {
-    [JsonPropertyName("id")]
-    public Guid Id { get; set; }
+    public class LendResponse
+    {
+        [JsonPropertyName("id")]
+        public Guid Id { get; set; }
 
-    [JsonPropertyName("code")]
-    public string Code { get; set; } = string.Empty;
+        [JsonPropertyName("code")]
+        public string Code { get; set; } = string.Empty;
 
-    [JsonPropertyName("status")]
-    public LendStatuses Status { get; set; }
+        [JsonPropertyName("status")]
+        public LendStatuses Status { get; set; }
 
-    [JsonPropertyName("book_id")]
-    public Guid BookId { get; set; }
+        [JsonPropertyName("book_id")]
+        public Guid BookId { get; set; }
 
-    [JsonPropertyName("start_date")]
-    public DateTime StartDate { get; private set; }
+        [JsonPropertyName("start_date")]
+        public DateTime StartDate { get; private set; }
 
-    [JsonPropertyName("end_date")]
-    public DateTime EndDate { get; private set; }
+        [JsonPropertyName("end_date")]
+        public DateTime EndDate { get; private set; }
 
-    [JsonPropertyName("created_date")]
-    public DateTime CreatedDate { get; private set; }
+        [JsonPropertyName("created_date")]
+        public DateTime CreatedDate { get; private set; }
 
-    [JsonPropertyName("concluded_date")]
-    public DateTime? ConcludedDate { get; private set; }
+        [JsonPropertyName("concluded_date")]
+        public DateTime? ConcludedDate { get; private set; }
 
-    [JsonPropertyName("cancelled_date")]
-    public DateTime? CancelledDate { get; private set; }
+        [JsonPropertyName("cancelled_date")]
+        public DateTime? CancelledDate { get; private set; }
+    }
 }

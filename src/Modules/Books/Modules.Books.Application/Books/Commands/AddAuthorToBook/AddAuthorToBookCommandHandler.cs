@@ -8,7 +8,7 @@ using MediatR;
 namespace DigitalLibrary.Modules.Books.Application.Commands.AddAuthorToBook;
 
 internal sealed class AddAuthorToBookCommandHandler
-    : IRequestHandler<AddAuthorToBookCommand, Result<BookResponse, Error>>
+    : IRequestHandler<AddAuthorToBookCommand, Result<BookContracts.BookResponse, Error>>
 {
     private readonly IBookAuthorRepository _bookAuthorRepository;
     private readonly IAuthorRepository _authorRepository;
@@ -30,7 +30,7 @@ internal sealed class AddAuthorToBookCommandHandler
         _mapper = mapper;
     }
 
-    public async Task<Result<BookResponse, Error>> Handle(
+    public async Task<Result<BookContracts.BookResponse, Error>> Handle(
         AddAuthorToBookCommand request,
         CancellationToken cancellationToken)
     {
@@ -70,8 +70,8 @@ internal sealed class AddAuthorToBookCommandHandler
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var result = _mapper.Map<BookResponse>(book);
+        var response = _mapper.Map<BookContracts.BookResponse>(book);
 
-        return result;
+        return response;
     }
 }

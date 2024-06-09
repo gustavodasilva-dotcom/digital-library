@@ -16,6 +16,10 @@ internal sealed class RegisterBookRequest
     public DateTime PublicationDate { get; set; }
 
     [Required]
+    [JsonPropertyName("publisher_id")]
+    public Guid PublisherId { get; set; }
+
+    [Required]
     [GreaterThanZero]
     [JsonPropertyName("total_pages")]
     public int TotalPages { get; set; }

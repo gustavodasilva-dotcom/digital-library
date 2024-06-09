@@ -15,4 +15,6 @@ internal static class DatabaseConstants
     public const string PublishersTable = "Publishers";
 
     public const string BooksTableCheckNotNegative = "CK_TotalPages_NotNegative";
+
+    public const string DigitalLibraryPublisher = "Digital Library Publisher";
 }

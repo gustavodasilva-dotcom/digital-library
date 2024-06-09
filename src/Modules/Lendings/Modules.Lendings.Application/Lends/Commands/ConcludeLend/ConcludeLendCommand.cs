@@ -5,4 +5,4 @@ using MediatR;
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.ConcludeLend;
 
 public sealed record ConcludeLendCommand(string Code)
-    : IRequest<Result<LendResponse, Error>>;
+    : IRequest<Result<LendContracts.LendResponse, Error>>;

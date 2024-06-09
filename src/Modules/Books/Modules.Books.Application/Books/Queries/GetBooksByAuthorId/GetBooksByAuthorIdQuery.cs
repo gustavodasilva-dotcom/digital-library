@@ -4,4 +4,4 @@ using MediatR;
 namespace DigitalLibrary.Modules.Books.Application.Queries.GetBooksByAuthorId;
 
 public sealed record GetBooksByAuthorIdQuery(Guid AuthorId)
-    : IRequest<IEnumerable<BookResponse>>;
+    : IRequest<IEnumerable<BookContracts.BookResponse>>;

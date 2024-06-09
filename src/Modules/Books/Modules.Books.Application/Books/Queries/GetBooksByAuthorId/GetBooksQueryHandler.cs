@@ -6,7 +6,7 @@ using MediatR;
 namespace DigitalLibrary.Modules.Books.Application.Queries.GetBooksByAuthorId;
 
 internal sealed class GetBooksQueryHandler
-    : IRequestHandler<GetBooksByAuthorIdQuery, IEnumerable<BookResponse>>
+    : IRequestHandler<GetBooksByAuthorIdQuery, IEnumerable<BookContracts.BookResponse>>
 {
     private readonly IBookRepository _bookRepository;
     private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ internal sealed class GetBooksQueryHandler
         _mapper = mapper;
     }
 
-    public Task<IEnumerable<BookResponse>> Handle(
+    public Task<IEnumerable<BookContracts.BookResponse>> Handle(
         GetBooksByAuthorIdQuery request,
         CancellationToken cancellationToken)
     {
         var books = _bookRepository.GetAll(b => b.Authors.Any(a => a.AuthorId == request.AuthorId));
 
-        var result = _mapper.Map<IEnumerable<BookResponse>>(books);
+        var result = _mapper.Map<IEnumerable<BookContracts.BookResponse>>(books);
 
         return Task.FromResult(result);
     }

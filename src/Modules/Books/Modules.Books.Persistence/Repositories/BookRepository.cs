@@ -18,6 +18,7 @@ internal sealed class BookRepository : RepositoryBase<Book>, IBookRepository
     public override List<Book> GetAll(Expression<Func<Book, bool>> expression)
     {
         return _dbContext.Books
+            .Include(b => b.Publisher)
             .Include(b => b.Authors)
             .Include(b => b.Lends)
             .Where(expression)
@@ -27,6 +28,7 @@ internal sealed class BookRepository : RepositoryBase<Book>, IBookRepository
     public override Book? Get(Expression<Func<Book, bool>> expression)
     {
         return _dbContext.Books
+            .Include(b => b.Publisher)
             .Include(b => b.Authors)
             .Include(b => b.Lends)
             .SingleOrDefault(expression);

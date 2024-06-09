@@ -8,4 +8,4 @@ namespace DigitalLibrary.Modules.Books.Application.Commands.AddAuthorToBook;
 public sealed record AddAuthorToBookCommand(
     Guid BookId,
     Guid AuthorId,
-    AuthorTypes AuthorType) : IRequest<Result<BookResponse, Error>>;
+    AuthorTypes AuthorType) : IRequest<Result<BookContracts.BookResponse, Error>>;

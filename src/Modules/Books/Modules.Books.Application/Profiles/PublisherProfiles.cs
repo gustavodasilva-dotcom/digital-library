@@ -8,6 +8,6 @@ public class PublisherProfiles : Profile
 {
     public PublisherProfiles()
     {
-        CreateMap<Publisher, PublisherResponse>();
+        CreateMap<Publisher, PublisherContracts.PublisherResponse>();
     }
 }

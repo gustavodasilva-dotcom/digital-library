@@ -32,7 +32,8 @@ public class RegisterBook : IEndpoint
                 request.TotalPages,
                 request.Edition,
                 request.Isbn10,
-                request.Isbn13);
+                request.Isbn13,
+                request.PublisherId);
 
             var result = await sender.Send(command);
 

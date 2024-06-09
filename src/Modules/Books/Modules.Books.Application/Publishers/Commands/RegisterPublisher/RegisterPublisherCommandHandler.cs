@@ -8,7 +8,7 @@ using MediatR;
 namespace DigitalLibrary.Modules.Books.Application.Publishers.Commands.RegisterPublisher;
 
 internal sealed class RegisterPublisherCommandHandler
-    : IRequestHandler<RegisterPublisherCommand, Result<PublisherResponse, Error>>
+    : IRequestHandler<RegisterPublisherCommand, Result<PublisherContracts.PublisherResponse, Error>>
 {
     private readonly IPublisherRepository _publisherRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -24,7 +24,7 @@ internal sealed class RegisterPublisherCommandHandler
         _mapper = mapper;
     }
 
-    public async Task<Result<PublisherResponse, Error>> Handle(
+    public async Task<Result<PublisherContracts.PublisherResponse, Error>> Handle(
         RegisterPublisherCommand request,
         CancellationToken cancellationToken)
     {
@@ -43,7 +43,7 @@ internal sealed class RegisterPublisherCommandHandler
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var response = _mapper.Map<PublisherResponse>(publisher);
+        var response = _mapper.Map<PublisherContracts.PublisherResponse>(publisher);
 
         return response;
     }

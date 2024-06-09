@@ -8,8 +8,10 @@ public class BookProfiles : Profile
 {
     public BookProfiles()
     {
-        CreateMap<Book, BookResponse>();
+        CreateMap<Book, BookContracts.BookResponse>();
 
-        CreateMap<BookAuthor, BookAuthorResponse>();
+        CreateMap<BookAuthor, BookContracts.BookAuthorResponse>();
+
+        CreateMap<Publisher, BookContracts.PublisherResponse>();
     }
 }

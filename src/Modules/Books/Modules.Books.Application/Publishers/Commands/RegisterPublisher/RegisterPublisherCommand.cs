@@ -5,4 +5,4 @@ using MediatR;
 namespace DigitalLibrary.Modules.Books.Application.Publishers.Commands.RegisterPublisher;
 
 public sealed record RegisterPublisherCommand(string Name)
-    : IRequest<Result<PublisherResponse, Error>>;
+    : IRequest<Result<PublisherContracts.PublisherResponse, Error>>;
