@@ -10,7 +10,16 @@ public class BookProfiles : Profile
     {
         CreateMap<Book, BookContracts.BookResponse>();
 
-        CreateMap<BookAuthor, BookContracts.BookAuthorResponse>();
+        CreateMap<BookAuthor, BookContracts.AuthorResponse>()
+            .ForMember(
+                dest => dest.Id,
+                opt => opt.MapFrom(src => src.Author.Id))
+            .ForMember(
+                dest => dest.Name,
+                opt => opt.MapFrom(src => src.Author.Name))
+            .ForMember(
+                dest => dest.Type,
+                opt => opt.MapFrom(src => src.AuthorType));
 
         CreateMap<Publisher, BookContracts.PublisherResponse>();
     }

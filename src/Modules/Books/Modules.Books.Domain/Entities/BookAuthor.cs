@@ -5,45 +5,53 @@ namespace DigitalLibrary.Modules.Books.Domain.Entities;
 
 public class BookAuthor : Entity
 {
+    private readonly Book _book;
+
+    private readonly Author _author;
+
     private BookAuthor()
     {
     }
 
     private BookAuthor(
         Guid id,
+        AuthorTypes authorType,
         Guid bookId,
         Guid authorId,
-        AuthorTypes authorType,
         DateTime createdDate) : base(id, createdDate)
     {
+        AuthorType = authorType;
         BookId = bookId;
         AuthorId = authorId;
-        AuthorType = authorType;
     }
+    
+    public AuthorTypes AuthorType { get; private set; }
 
     public Guid BookId { get; private set; }
 
     public Guid AuthorId { get; private set; }
 
-    public AuthorTypes AuthorType { get; private set; }
+    public Book Book => _book;
+
+    public Author Author => _author;
 
     public override IEnumerable<object> GetAtomicValues()
     {
+        yield return AuthorType;
         yield return BookId;
         yield return AuthorId;
-        yield return AuthorType;
     }
 
     public static BookAuthor Create(
+        AuthorTypes authorType,
         Guid bookId,
-        Guid authorId,
-        AuthorTypes authorType)
+        Guid authorId)
     {
         var bookAuthor = new BookAuthor(
             id: Guid.NewGuid(),
+            authorType,
             bookId,
             authorId,
-            authorType,
             createdDate: DateTime.Now);
 
         return bookAuthor;

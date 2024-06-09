@@ -31,7 +31,7 @@ internal sealed class BookConfiguration : IEntityTypeConfiguration<Book>
             .HasForeignKey(l => l.BookId);
 
         builder.HasMany(p => p.Authors)
-            .WithOne()
-            .HasForeignKey(a => a.BookId);
+            .WithOne(ba => ba.Book)
+            .HasForeignKey(ba => ba.BookId);
     }
 }

@@ -5,16 +5,16 @@ namespace DigitalLibrary.Modules.Books.Application.Contracts;
 
 public static class BookContracts
 {
-    public class BookAuthorResponse
+    public class AuthorResponse
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }
 
-        [JsonPropertyName("author_id")]
-        public Guid AuthorId { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
 
         [JsonPropertyName("author_type")]
-        public AuthorTypes AuthorType { get; set; }
+        public AuthorTypes Type { get; set; }
     }
 
     public class PublisherResponse
@@ -53,7 +53,7 @@ public static class BookContracts
         public bool IsAvailable { get; set; }
 
         [JsonPropertyName("authors")]
-        public List<BookAuthorResponse> Authors { get; set; } = [];
+        public List<AuthorResponse> Authors { get; set; } = [];
 
         [JsonPropertyName("publisher")]
         public PublisherResponse Publisher { get; set; } = new();

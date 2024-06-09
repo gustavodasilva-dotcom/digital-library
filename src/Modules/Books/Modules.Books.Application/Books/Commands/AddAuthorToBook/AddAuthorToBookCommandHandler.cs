@@ -53,9 +53,9 @@ internal sealed class AddAuthorToBookCommandHandler
         }
 
         var bookAuthor = BookAuthor.Create(
+            request.AuthorType,
             request.BookId,
-            request.AuthorId,
-            request.AuthorType);
+            request.AuthorId);
 
         var bookAuthorResult = book.AddBookAuthor(bookAuthor);
 

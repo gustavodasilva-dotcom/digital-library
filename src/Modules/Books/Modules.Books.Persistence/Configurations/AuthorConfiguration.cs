@@ -16,7 +16,7 @@ internal sealed class AuthorConfiguration : IEntityTypeConfiguration<Author>
         builder.Property(p => p.Name).HasMaxLength(200);
 
         builder.HasMany(p => p.Books)
-            .WithOne()
-            .HasForeignKey(b => b.AuthorId);
+            .WithOne(ba => ba.Author)
+            .HasForeignKey(ba => ba.AuthorId);
     }
 }
