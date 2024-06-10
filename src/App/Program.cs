@@ -2,6 +2,7 @@ using DigitalLibrary.App.Middlewares;
 using DigitalLibrary.Common.Infrastructure.Endpoints;
 using DigitalLibrary.Modules.Books.Infrastructure;
 using DigitalLibrary.Modules.Lendings.Infrastructure;
+using DigitalLibrary.Modules.Patrons.Infrastructure;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddLending(builder.Configuration);
-builder.Services.AddBooks(builder.Configuration);
+builder.Services.AddLendingsDependencies(builder.Configuration);
+builder.Services.AddBooksDependencies(builder.Configuration);
+builder.Services.AddPatronsDependencies(builder.Configuration);
 
 builder.Services.AddMassTransit(config =>
 {

@@ -1,4 +1,5 @@
 using AutoMapper;
+using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Books.Application.Contracts;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;

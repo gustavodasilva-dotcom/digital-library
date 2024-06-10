@@ -2,7 +2,7 @@ using DigitalLibrary.Common.Domain.Abstractions;
 
 namespace DigitalLibrary.Modules.Lendings.Domain.Entities;
 
-public abstract class Entity
+public abstract class Entity : BaseEntity
 {
     private readonly List<IDomainEvent> _domainEvents = [];
 
@@ -16,16 +16,13 @@ public abstract class Entity
         _domainEvents.Clear();
     }
 
-    protected Entity()
+    protected Entity() : base()
     {
     }
 
-    public Entity(Guid id)
+    protected Entity(Guid id) : base(id)
     {
-        Id = id;
     }
-
-    public Guid Id { get; private set; }
 
     protected void RaiseDomainEvent(IDomainEvent domainEvent)
     {

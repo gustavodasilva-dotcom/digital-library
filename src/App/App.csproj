@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Modules\Lendings\Modules.Lendings.Infrastructure\Modules.Lendings.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Books\Modules.Books.Infrastructure\Modules.Books.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Books\Modules.Books.Application\Modules.Books.Application.csproj" />
+    <ProjectReference Include="..\Modules\Patrons\Modules.Patrons.Infrastructure\Modules.Patrons.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

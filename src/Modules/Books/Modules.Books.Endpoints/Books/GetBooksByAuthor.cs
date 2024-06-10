@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace DigitalLibrary.Modules.Books.Endpoints;
+namespace DigitalLibrary.Modules.Books.Endpoints.Books;
 
 public class GetBooksByAuthor : IEndpoint
 {

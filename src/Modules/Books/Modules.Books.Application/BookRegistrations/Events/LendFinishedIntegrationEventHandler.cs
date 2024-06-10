@@ -1,3 +1,4 @@
+using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Modules.Books.Application.Exceptions;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
 using DigitalLibrary.Modules.Lendings.IntegrationEvents.Contracts;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace DigitalLibrary.Modules.Books.Endpoints;
+namespace DigitalLibrary.Modules.Books.Endpoints.Books;
 
 public class AddAuthorToBook : IEndpoint
 {

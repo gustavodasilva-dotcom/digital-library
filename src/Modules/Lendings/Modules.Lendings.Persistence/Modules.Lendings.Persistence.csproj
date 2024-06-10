@@ -2,6 +2,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Modules.Lendings.Domain\Modules.Lendings.Domain.csproj" />
     <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Persistence\Common.Persistence.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EFCore.CheckConstraints" Version="8.0.1" />
@@ -14,7 +15,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-    <PackageReference Include="RandomString4Net" Version="1.8.0" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

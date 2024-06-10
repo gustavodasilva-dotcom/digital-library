@@ -8,7 +8,7 @@ namespace DigitalLibrary.Modules.Books.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddBooks(
+    public static IServiceCollection AddBooksDependencies(
         this IServiceCollection services,
         IConfiguration configuration)
     {

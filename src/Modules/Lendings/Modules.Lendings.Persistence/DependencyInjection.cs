@@ -1,3 +1,4 @@
+using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
 using DigitalLibrary.Modules.Lendings.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

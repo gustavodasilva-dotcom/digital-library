@@ -8,7 +8,7 @@ namespace DigitalLibrary.Modules.Lendings.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddLending(
+    public static IServiceCollection AddLendingsDependencies(
         this IServiceCollection services,
         IConfiguration configuration)
     {

@@ -1,18 +1,12 @@
-using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
+using DigitalLibrary.Common.Domain.Abstractions;
+using DigitalLibrary.Common.Persistence;
 
 namespace DigitalLibrary.Modules.Lendings.Persistence;
 
-internal sealed class UnitOfWork : IUnitOfWork
+internal sealed class UnitOfWork : UnitOfWork<LendingsDbContext>, IUnitOfWork
 {
-    private readonly LendingsDbContext _dbContext;
-
     public UnitOfWork(LendingsDbContext dbContext)
+        : base(dbContext)
     {
-        _dbContext = dbContext;
-    }
-
-    public Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-    {
-        return _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

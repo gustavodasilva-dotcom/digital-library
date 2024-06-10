@@ -44,6 +44,15 @@ public class Lend : Entity
 
     public DateTime? CancelledDate { get; private set; }
 
+    public override IEnumerable<object> GetAtomicValues()
+    {
+        yield return Code;
+        yield return Status;
+        yield return BookId;
+        yield return StartDate;
+        yield return EndDate;
+    }
+
     private void CreateBookLentDomainEvent()
     {
         RaiseDomainEvent(
@@ -68,7 +77,7 @@ public class Lend : Entity
     public static Lend Create(Guid bookId, DateTime startDate, DateTime endDate)
     {
         var lend = new Lend(
-            Guid.NewGuid(),
+            id: Guid.NewGuid(),
             code: RandomString.GetString(Types.ALPHANUMERIC_UPPERCASE, 10),
             status: LendStatuses.Open,
             bookId,

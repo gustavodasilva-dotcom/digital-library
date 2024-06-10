@@ -2,6 +2,17 @@ namespace DigitalLibrary.Common.Domain.Abstractions;
 
 public abstract class BaseEntity : IEquatable<BaseEntity>
 {
+    protected BaseEntity()
+    {
+    }
+
+    protected BaseEntity(Guid id)
+    {
+        Id = id;
+    }
+
+    public Guid Id { get; private set; }
+
     public abstract IEnumerable<object> GetAtomicValues();
 
     private bool ValuesAreEqual(BaseEntity other)
