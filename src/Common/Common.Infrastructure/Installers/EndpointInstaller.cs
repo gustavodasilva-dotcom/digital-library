@@ -4,19 +4,19 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace DigitalLibrary.Common.Infrastructure.Endpoints;
+namespace DigitalLibrary.Common.Infrastructure.Installers;
 
-public static class Endpoint
+public static class EndpointInstaller
 {
-    public static IServiceCollection RegisterEndpoints(
+    public static IServiceCollection InstallEndpoints(
         this IServiceCollection services,
         Assembly assembly)
     {
         ServiceDescriptor[] serviceDescriptors = assembly
             .DefinedTypes
             .Where(type => type is { IsAbstract: false, IsInterface: false } &&
-                           type.IsAssignableTo(typeof(IEndpoint)))
-            .Select(type => ServiceDescriptor.Transient(typeof(IEndpoint), type))
+                           type.IsAssignableTo(typeof(IEndpointInstaller)))
+            .Select(type => ServiceDescriptor.Transient(typeof(IEndpointInstaller), type))
             .ToArray();
 
         services.TryAddEnumerable(serviceDescriptors);
@@ -24,19 +24,19 @@ public static class Endpoint
         return services;
     }
 
-    public static IApplicationBuilder MapRegisteredEndpoints(
+    public static IApplicationBuilder MapEndpoints(
         this WebApplication app,
         RouteGroupBuilder? routeGroupBuilder = null)
     {
-        IEnumerable<IEndpoint> endpoints = app.Services
-            .GetRequiredService<IEnumerable<IEndpoint>>();
+        IEnumerable<IEndpointInstaller> endpoints = app.Services
+            .GetRequiredService<IEnumerable<IEndpointInstaller>>();
 
         IEndpointRouteBuilder builder =
             routeGroupBuilder is null ? app : routeGroupBuilder;
 
-        foreach (IEndpoint endpoint in endpoints)
+        foreach (IEndpointInstaller endpoint in endpoints)
         {
-            endpoint.MapEndpoint(builder);
+            endpoint.InstallEndpoint(builder);
         }
 
         return app;

@@ -1,4 +1,4 @@
-using DigitalLibrary.Common.Infrastructure.Endpoints;
+using DigitalLibrary.Common.Infrastructure.Installers;
 using DigitalLibrary.Modules.Books.Application.Queries.GetBooksByAuthorId;
 using DigitalLibrary.Modules.Books.Endpoints.Routes;
 using MediatR;
@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace DigitalLibrary.Modules.Books.Endpoints.Books;
 
-public class GetBooksByAuthor : IEndpoint
+public class GetBooksByAuthor : IEndpointInstaller
 {
-    public void MapEndpoint(IEndpointRouteBuilder app)
+    public void InstallEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet(BooksRoutes.GetByAuthor, async (
             Guid authorId,

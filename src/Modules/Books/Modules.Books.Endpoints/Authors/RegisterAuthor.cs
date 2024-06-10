@@ -1,5 +1,5 @@
 using DigitalLibrary.Common.Domain.Extensions;
-using DigitalLibrary.Common.Infrastructure.Endpoints;
+using DigitalLibrary.Common.Infrastructure.Installers;
 using DigitalLibrary.Modules.Books.Application.Authors.Commands.RegisterAuthor;
 using DigitalLibrary.Modules.Books.Endpoints.Contracts;
 using DigitalLibrary.Modules.Books.Endpoints.Routes;
@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace DigitalLibrary.Modules.Books.Endpoints.Authors;
 
-public class RegisterAuthor : IEndpoint
+public class RegisterAuthor : IEndpointInstaller
 {
-    public void MapEndpoint(IEndpointRouteBuilder app)
+    public void InstallEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost(AuthorsRoutes.Register, async (
             [FromBody] RegisterAuthorRequest request,

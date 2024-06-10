@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace DigitalLibrary.Modules.Lendings.Infrastructure;
+namespace DigitalLibrary.Modules.Books.Infrastructure;
 
 public static class AssemblyReference
 {

@@ -1,8 +1,5 @@
 using DigitalLibrary.App.Middlewares;
-using DigitalLibrary.Common.Infrastructure.Endpoints;
-using DigitalLibrary.Modules.Books.Infrastructure;
-using DigitalLibrary.Modules.Lendings.Infrastructure;
-using DigitalLibrary.Modules.Patrons.Infrastructure;
+using DigitalLibrary.Common.Infrastructure.Installers;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,9 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddLendingsDependencies(builder.Configuration);
-builder.Services.AddBooksDependencies(builder.Configuration);
-builder.Services.AddPatronsDependencies(builder.Configuration);
+builder.Services
+    .InstallDependencies(
+        builder.Configuration,
+        DigitalLibrary.Modules.Books.Infrastructure.AssemblyReference.Assembly,
+        DigitalLibrary.Modules.Lendings.Infrastructure.AssemblyReference.Assembly,
+        DigitalLibrary.Modules.Patrons.Infrastructure.AssemblyReference.Assembly);
 
 builder.Services.AddMassTransit(config =>
 {
@@ -40,6 +40,6 @@ app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
-app.MapRegisteredEndpoints();
+app.MapEndpoints();
 
 app.Run();

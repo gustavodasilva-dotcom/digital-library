@@ -1,4 +1,4 @@
-using DigitalLibrary.Common.Infrastructure.Endpoints;
+using DigitalLibrary.Common.Infrastructure.Installers;
 using DigitalLibrary.Modules.Lendings.Application.Lends.Commands.CancelLend;
 using DigitalLibrary.Modules.Lendings.Endpoints.Routes;
 using MediatR;
@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace DigitalLibrary.Modules.Lendings.Endpoints.Lends;
 
-public class CancelLend : IEndpoint
+public class CancelLend : IEndpointInstaller
 {
-    public void MapEndpoint(IEndpointRouteBuilder app)
+    public void InstallEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPut(LendingsRoutes.Cancel, async (
             string code,

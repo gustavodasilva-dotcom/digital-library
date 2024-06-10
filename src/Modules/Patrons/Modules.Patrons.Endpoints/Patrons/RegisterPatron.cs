@@ -1,5 +1,5 @@
 using DigitalLibrary.Common.Domain.Extensions;
-using DigitalLibrary.Common.Infrastructure.Endpoints;
+using DigitalLibrary.Common.Infrastructure.Installers;
 using DigitalLibrary.Modules.Patrons.Application;
 using DigitalLibrary.Modules.Patrons.Endpoints.Contracts;
 using DigitalLibrary.Modules.Patrons.Endpoints.Routes;
@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace DigitalLibrary.Modules.Patrons.Endpoints.Patrons;
 
-public class RegisterPatron : IEndpoint
+public class RegisterPatron : IEndpointInstaller
 {
-    public void MapEndpoint(IEndpointRouteBuilder app)
+    public void InstallEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost(PatronsRoutes.Register, async (
             [FromBody] RegisterPatronRequest request,
