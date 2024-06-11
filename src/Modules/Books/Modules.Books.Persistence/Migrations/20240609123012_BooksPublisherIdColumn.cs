@@ -17,14 +17,7 @@ namespace Modules.Books.Persistence.Migrations
                 schema: "books",
                 table: "Books",
                 type: "uniqueidentifier",
-                nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_PublisherId",
-                schema: "books",
-                table: "Books",
-                column: "PublisherId");
+                nullable: true);
 
             migrationBuilder.Sql($@"
                 CREATE TABLE #TempPublisherId (Id uniqueidentifier);
@@ -39,6 +32,19 @@ namespace Modules.Books.Persistence.Migrations
                 UPDATE [books].[Books] SET [PublisherId] = @PublisherId;
 
                 DROP TABLE #TempPublisherId;");
+
+            migrationBuilder.AlterColumn<Guid>(
+                name: "PublisherId",
+                schema: "books",
+                table: "Books",
+                type: "uniqueidentifier",
+                nullable: false);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_PublisherId",
+                schema: "books",
+                table: "Books",
+                column: "PublisherId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Books_Publishers_PublisherId",
@@ -59,10 +65,6 @@ namespace Modules.Books.Persistence.Migrations
                 schema: "books",
                 table: "Books");
 
-            migrationBuilder.Sql($@"
-                DELETE FROM [books].[Publishers]
-                WHERE [Name] = N'{DatabaseConstants.DigitalLibraryPublisher}';");
-
             migrationBuilder.DropIndex(
                 name: "IX_Books_PublisherId",
                 schema: "books",
@@ -72,6 +74,10 @@ namespace Modules.Books.Persistence.Migrations
                 name: "PublisherId",
                 schema: "books",
                 table: "Books");
+
+            migrationBuilder.Sql($@"
+                DELETE FROM [books].[Publishers]
+                WHERE [Name] = N'{DatabaseConstants.DigitalLibraryPublisher}';");
         }
     }
 }
