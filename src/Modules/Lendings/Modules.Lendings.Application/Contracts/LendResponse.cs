@@ -19,6 +19,9 @@ public class LendContracts
         [JsonPropertyName("book_id")]
         public Guid BookId { get; set; }
 
+        [JsonPropertyName("patron_id")]
+        public Guid PatronId { get; set; }
+
         [JsonPropertyName("start_date")]
         public DateTime StartDate { get; private set; }
 

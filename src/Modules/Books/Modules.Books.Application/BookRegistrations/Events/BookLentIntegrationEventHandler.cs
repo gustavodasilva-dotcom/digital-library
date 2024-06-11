@@ -1,9 +1,11 @@
 using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Modules.Books.Application.Exceptions;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
+using DigitalLibrary.Modules.Books.Domain.Constants;
 using DigitalLibrary.Modules.Books.Domain.Entities;
 using DigitalLibrary.Modules.Lendings.IntegrationEvents.Contracts;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Books.Application.BookRegistrations.Events;
 
@@ -17,7 +19,7 @@ public sealed class BookLentIntegrationEventHandler
     public BookLentIntegrationEventHandler(
         IBookRepository bookRepository,
         IBookLendRepository bookLendRepository,
-        IUnitOfWork unitOfWork)
+        [FromKeyedServices(ServicesConstants.BooksUnitOfWork)] IUnitOfWork unitOfWork)
     {
         _bookRepository = bookRepository;
         _bookLendRepository = bookLendRepository;

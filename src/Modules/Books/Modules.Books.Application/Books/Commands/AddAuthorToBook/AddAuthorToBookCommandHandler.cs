@@ -3,8 +3,10 @@ using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Books.Application.Contracts;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
+using DigitalLibrary.Modules.Books.Domain.Constants;
 using DigitalLibrary.Modules.Books.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Books.Application.Commands.AddAuthorToBook;
 
@@ -21,7 +23,7 @@ internal sealed class AddAuthorToBookCommandHandler
         IBookAuthorRepository bookAuthorRepository,
         IAuthorRepository authorRepository,
         IBookRepository bookRepository,
-        IUnitOfWork unitOfWork,
+        [FromKeyedServices(ServicesConstants.BooksUnitOfWork)] IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _bookAuthorRepository = bookAuthorRepository;

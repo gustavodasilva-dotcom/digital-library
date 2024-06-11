@@ -16,6 +16,7 @@ public class Lend : Entity
         string code,
         LendStatuses status,
         Guid bookId,
+        Guid patronId,
         DateTime startDate,
         DateTime endDate,
         DateTime createdDate) : base(id)
@@ -23,6 +24,7 @@ public class Lend : Entity
         Code = code;
         Status = status;
         BookId = bookId;
+        PatronId = patronId;
         StartDate = startDate;
         EndDate = endDate;
         CreatedDate = createdDate;
@@ -33,6 +35,8 @@ public class Lend : Entity
     public LendStatuses Status { get; private set; }
 
     public Guid BookId { get; private set; }
+
+    public Guid PatronId { get; private set; }
 
     public DateTime StartDate { get; private set; }
 
@@ -49,6 +53,7 @@ public class Lend : Entity
         yield return Code;
         yield return Status;
         yield return BookId;
+        yield return PatronId;
         yield return StartDate;
         yield return EndDate;
     }
@@ -74,13 +79,20 @@ public class Lend : Entity
         RaiseDomainEvent(new BookLendCancelledDomainEvent(BookId));
     }
 
-    public static Lend Create(Guid bookId, DateTime startDate, DateTime endDate)
+    public static Lend Create(
+        Guid bookId,
+        Guid patronId,
+        DateTime startDate,
+        DateTime endDate)
     {
+        string code = RandomString.GetString(Types.ALPHANUMERIC_UPPERCASE, 10);
+
         var lend = new Lend(
             id: Guid.NewGuid(),
-            code: RandomString.GetString(Types.ALPHANUMERIC_UPPERCASE, 10),
+            code,
             status: LendStatuses.Open,
             bookId,
+            patronId,
             startDate,
             endDate,
             createdDate: DateTime.Now);

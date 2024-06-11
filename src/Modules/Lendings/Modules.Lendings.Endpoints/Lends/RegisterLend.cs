@@ -28,6 +28,7 @@ public class RegisterLend : IEndpointInstaller
 
             var command = new RegisterLendCommand(
                 request.BookId,
+                request.PatronId,
                 request.StartDate,
                 request.EndDate);
 

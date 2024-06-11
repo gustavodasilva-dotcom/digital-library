@@ -3,8 +3,10 @@ using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Books.Application.Contracts;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
+using DigitalLibrary.Modules.Books.Domain.Constants;
 using DigitalLibrary.Modules.Books.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Books.Application.Publishers.Commands.RegisterPublisher;
 
@@ -17,7 +19,7 @@ internal sealed class RegisterPublisherCommandHandler
 
     public RegisterPublisherCommandHandler(
         IPublisherRepository publisherRepository,
-        IUnitOfWork unitOfWork,
+        [FromKeyedServices(ServicesConstants.BooksUnitOfWork)] IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _publisherRepository = publisherRepository;

@@ -1,5 +1,6 @@
 using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
+using DigitalLibrary.Modules.Books.Domain.Constants;
 using DigitalLibrary.Modules.Books.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,12 +17,13 @@ public static class DependencyInjection
         services.AddDbContext<BooksDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
 
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IBookRepository, BookRepository>();
-        services.AddScoped<IAuthorRepository, AuthorRepository>();
-        services.AddScoped<IBookAuthorRepository, BookAuthorRepository>();
-        services.AddScoped<IBookLendRepository, BookLendRepository>();
-        services.AddScoped<IPublisherRepository, PublisherRepository>();
+        services
+            .AddKeyedScoped<IUnitOfWork, UnitOfWork>(ServicesConstants.BooksUnitOfWork)
+            .AddScoped<IBookRepository, BookRepository>()
+            .AddScoped<IAuthorRepository, AuthorRepository>()
+            .AddScoped<IBookAuthorRepository, BookAuthorRepository>()
+            .AddScoped<IBookLendRepository, BookLendRepository>()
+            .AddScoped<IPublisherRepository, PublisherRepository>();
 
         return services;
     }

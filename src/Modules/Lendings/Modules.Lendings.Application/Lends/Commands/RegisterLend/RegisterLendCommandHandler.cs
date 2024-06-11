@@ -3,8 +3,10 @@ using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Lendings.Application.Contracts;
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
+using DigitalLibrary.Modules.Lendings.Domain.Constants;
 using DigitalLibrary.Modules.Lendings.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLend;
 
@@ -17,7 +19,7 @@ internal sealed class RegisterLendCommandHandler
 
     public RegisterLendCommandHandler(
         ILendRepository lendRepository,
-        IUnitOfWork unitOfWork,
+        [FromKeyedServices(ServicesConstants.LendingsUnitOfWork)] IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _lendRepository = lendRepository;
@@ -34,7 +36,11 @@ internal sealed class RegisterLendCommandHandler
             return new Error("RegisterLend.BookIsLent", "This book has already been lent");
         }
 
-        var lend = Lend.Create(request.BookId, request.StartDate, request.EndDate);
+        var lend = Lend.Create(
+            request.BookId,
+            request.PatronId,
+            request.StartDate,
+            request.EndDate);
 
         _lendRepository.Add(lend);
 

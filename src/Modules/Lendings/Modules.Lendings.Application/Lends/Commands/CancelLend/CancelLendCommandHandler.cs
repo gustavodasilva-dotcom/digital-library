@@ -3,7 +3,9 @@ using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Lendings.Application.Contracts;
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
+using DigitalLibrary.Modules.Lendings.Domain.Constants;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.CancelLend;
 
@@ -16,7 +18,7 @@ internal sealed class CancelLendCommandHandler
 
     public CancelLendCommandHandler(
         ILendRepository lendRepository,
-        IUnitOfWork unitOfWork,
+        [FromKeyedServices(ServicesConstants.LendingsUnitOfWork)] IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _lendRepository = lendRepository;

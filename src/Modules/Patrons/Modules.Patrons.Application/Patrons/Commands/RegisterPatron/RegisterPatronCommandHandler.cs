@@ -3,8 +3,10 @@ using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
 using DigitalLibrary.Modules.Patrons.Application.Contracts;
 using DigitalLibrary.Modules.Patrons.Domain.Abstractions;
+using DigitalLibrary.Modules.Patrons.Domain.Constants;
 using DigitalLibrary.Modules.Patrons.Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalLibrary.Modules.Patrons.Application;
 
@@ -17,7 +19,7 @@ internal sealed class RegisterPatronCommandHandler
 
     public RegisterPatronCommandHandler(
         IPatronRepository patronRepository,
-        IUnitOfWork unitOfWork,
+        [FromKeyedServices(ServicesConstants.PatronsUnitOfWork)] IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _patronRepository = patronRepository;

@@ -1,5 +1,6 @@
 using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Modules.Lendings.Domain.Abstractions;
+using DigitalLibrary.Modules.Lendings.Domain.Constants;
 using DigitalLibrary.Modules.Lendings.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +17,9 @@ public static class DependencyInjection
         services.AddDbContext<LendingsDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("Default")));
 
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<ILendRepository, LendRepository>();
+        services
+            .AddKeyedScoped<IUnitOfWork, UnitOfWork>(ServicesConstants.LendingsUnitOfWork)
+            .AddScoped<ILendRepository, LendRepository>();
 
         return services;
     }
