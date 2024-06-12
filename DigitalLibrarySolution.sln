@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Patrons.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Patrons.Endpoints", "src\Modules\Patrons\Modules.Patrons.Endpoints\Modules.Patrons.Endpoints.csproj", "{385ABBF7-A50D-49E0-BA80-4EE623349B83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Books.UnitTests", "src\Modules\Books\Modules.Books.UnitTests\Modules.Books.UnitTests.csproj", "{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,10 @@ Global
 		{385ABBF7-A50D-49E0-BA80-4EE623349B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385ABBF7-A50D-49E0-BA80-4EE623349B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385ABBF7-A50D-49E0-BA80-4EE623349B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A97117A5-B6DC-4DE2-9654-8C898D6E303D} = {F4AE63A5-90DF-4A15-887A-82498955C053}
@@ -171,5 +177,6 @@ Global
 		{1534D2BE-3B52-4435-8469-4E386CC1B968} = {0C531CBC-4E27-4B6B-9502-6A8F608DD131}
 		{EE79AE9D-B7B2-449C-8C50-F696D81444EF} = {0C531CBC-4E27-4B6B-9502-6A8F608DD131}
 		{385ABBF7-A50D-49E0-BA80-4EE623349B83} = {0C531CBC-4E27-4B6B-9502-6A8F608DD131}
+		{B9E41FDC-4689-4CEC-8CB4-80EC9A4C4934} = {451330C6-3B0C-4430-A18E-1B4659AA7254}
 	EndGlobalSection
 EndGlobal

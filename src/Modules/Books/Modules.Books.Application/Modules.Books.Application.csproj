@@ -19,4 +19,10 @@
     <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>Modules.Books.UnitTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
 </Project>

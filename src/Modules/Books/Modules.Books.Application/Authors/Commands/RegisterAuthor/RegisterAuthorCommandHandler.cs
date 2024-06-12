@@ -1,5 +1,7 @@
+using AutoMapper;
 using DigitalLibrary.Common.Domain.Abstractions;
 using DigitalLibrary.Common.Domain.Shared;
+using DigitalLibrary.Modules.Books.Application.Contracts;
 using DigitalLibrary.Modules.Books.Domain.Abstractions;
 using DigitalLibrary.Modules.Books.Domain.Constants;
 using DigitalLibrary.Modules.Books.Domain.Entities;
@@ -9,20 +11,23 @@ using Microsoft.Extensions.DependencyInjection;
 namespace DigitalLibrary.Modules.Books.Application.Authors.Commands.RegisterAuthor;
 
 internal sealed class RegisterAuthorCommandHandler
-    : IRequestHandler<RegisterAuthorCommand, Result<Guid, Error>>
+    : IRequestHandler<RegisterAuthorCommand, Result<AuthorContracts.AuthorResponse, Error>>
 {
     private readonly IAuthorRepository _authorRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
     public RegisterAuthorCommandHandler(
         IAuthorRepository authorRepository,
-        [FromKeyedServices(ServicesConstants.BooksUnitOfWork)] IUnitOfWork unitOfWork)
+        [FromKeyedServices(ServicesConstants.BooksUnitOfWork)] IUnitOfWork unitOfWork,
+        IMapper mapper)
     {
         _authorRepository = authorRepository;
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<Result<Guid, Error>> Handle(
+    public async Task<Result<AuthorContracts.AuthorResponse, Error>> Handle(
         RegisterAuthorCommand request,
         CancellationToken cancellationToken)
     {
@@ -39,6 +44,8 @@ internal sealed class RegisterAuthorCommandHandler
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return author.Id;
+        var response = _mapper.Map<AuthorContracts.AuthorResponse>(author);
+
+        return response;
     }
 }
