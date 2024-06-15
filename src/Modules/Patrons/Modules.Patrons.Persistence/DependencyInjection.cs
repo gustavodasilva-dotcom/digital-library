@@ -19,7 +19,8 @@ public static class DependencyInjection
 
         services
             .AddKeyedScoped<IUnitOfWork, UnitOfWork>(ServicesConstants.PatronsUnitOfWork)
-            .AddScoped<IPatronRepository, PatronRepository>();
+            .AddScoped<IPatronRepository, PatronRepository>()
+            .AddScoped<IPatronLendRepository, PatronLendRepository>();
 
         return services;
     }

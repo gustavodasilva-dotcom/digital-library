@@ -7,7 +7,7 @@ namespace DigitalLibrary.Modules.Lendings.Domain.Entities;
 
 public class Lend : Entity
 {
-    private Lend()
+    private Lend() : base()
     {
     }
 
@@ -69,6 +69,17 @@ public class Lend : Entity
                 CreatedDate));
     }
 
+    public void CreatePatronLentDomainEvent()
+    {
+        RaiseDomainEvent(
+            new PatronLentDomainEvent(
+                LentId: Id,
+                PatronId,
+                StartDate,
+                EndDate,
+                CreatedDate));
+    }
+
     private void CreateBookLendConcludedDomainEvent()
     {
         RaiseDomainEvent(new BookLendConcludedDomainEvent(BookId));
@@ -98,6 +109,7 @@ public class Lend : Entity
             createdDate: DateTime.Now);
 
         lend.CreateBookLentDomainEvent();
+        lend.CreatePatronLentDomainEvent();
 
         return lend;
     }

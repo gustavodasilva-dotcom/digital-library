@@ -9,7 +9,7 @@ public class Book : Entity
     private readonly HashSet<BookAuthor> _authors = [];
     private readonly HashSet<BookLend> _lends = [];
 
-    private Book()
+    private Book() : base()
     {
     }
 
@@ -115,8 +115,17 @@ public class Book : Entity
         return bookAuthor;
     }
 
-    public void AddLend(BookLend bookLend)
+    public Result<Book, Error> AddLend(BookLend bookLend)
     {
+        if (_lends.Any(l => l.Equals(bookLend)))
+        {
+            return new Error(
+                "AddLend.BookAlreadyHasLend",
+                "It's not possible to add repetead lends to a book");
+        }
+
         _lends.Add(bookLend);
+
+        return this;
     }
 }

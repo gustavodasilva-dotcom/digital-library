@@ -49,11 +49,16 @@ public sealed class BookLentIntegrationEventHandler
             message.EndDate,
             message.CreatedDate);
         
-        _bookLendRepository.Add(bookLend);
+        var bookLendResult = book.AddLend(bookLend);
 
-        book.AddLend(bookLend);
+        if (bookLendResult.IsFailure)
+        {
+            throw new NotAllowedOperationException(bookLendResult.Error!);
+        }
+
         book.TurnBookIntoUnavailable();
 
+        _bookLendRepository.Add(bookLend);
         _bookRepository.Update(book);
 
         await _unitOfWork.SaveChangesAsync(context.CancellationToken);

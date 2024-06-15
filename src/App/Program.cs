@@ -17,7 +17,8 @@ builder.Services
 builder.Services.AddMassTransit(config =>
 {
     config.AddConsumers(
-        DigitalLibrary.Modules.Books.Application.AssemblyReference.Assembly);
+        DigitalLibrary.Modules.Books.Application.AssemblyReference.Assembly,
+        DigitalLibrary.Modules.Patrons.Application.AssemblyReference.Assembly);
     
     config.UsingInMemory((context, config) =>
     {

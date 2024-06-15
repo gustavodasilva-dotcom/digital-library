@@ -4,7 +4,7 @@ public class Author : Entity
 {
     private readonly HashSet<BookAuthor> _books = [];
 
-    private Author()
+    private Author() : base()
     {
     }
 

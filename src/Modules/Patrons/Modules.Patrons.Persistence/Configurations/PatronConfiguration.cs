@@ -22,5 +22,9 @@ internal sealed class PatronConfiguration : IEntityTypeConfiguration<Patron>
             .IsRequired(false);
 
         builder.Property(p => p.LastName).HasMaxLength(50);
+
+        builder.HasMany(p => p.Lends)
+            .WithOne()
+            .HasForeignKey(pl => pl.PatronId);
     }
 }

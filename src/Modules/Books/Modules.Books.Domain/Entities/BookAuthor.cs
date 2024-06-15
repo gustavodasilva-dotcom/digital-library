@@ -9,7 +9,7 @@ public class BookAuthor : Entity
 
     private readonly Author _author;
 
-    private BookAuthor()
+    private BookAuthor() : base()
     {
     }
 

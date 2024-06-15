@@ -4,6 +4,7 @@ using DigitalLibrary.Modules.Patrons.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Modules.Patrons.Persistence.Migrations
 {
     [DbContext(typeof(PatronsDbContext))]
-    partial class PatronsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240613022712_PatronLendsTable")]
+    partial class PatronLendsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

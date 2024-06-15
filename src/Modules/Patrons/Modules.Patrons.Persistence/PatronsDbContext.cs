@@ -20,4 +20,6 @@ public class PatronsDbContext : DbContext
     }
 
     public DbSet<Patron> Patrons { get; set; }
+
+    public DbSet<PatronLend> PatronLends { get; set; }
 }

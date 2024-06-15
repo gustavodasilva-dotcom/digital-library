@@ -7,7 +7,7 @@ public class Publisher : Entity
 {
     private readonly HashSet<Book> _books = [];
 
-    private Publisher()
+    private Publisher() : base()
     {
     }
 

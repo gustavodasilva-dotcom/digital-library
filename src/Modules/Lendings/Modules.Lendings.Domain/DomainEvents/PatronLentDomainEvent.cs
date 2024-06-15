@@ -1,0 +1,10 @@
+using DigitalLibrary.Common.Domain.Abstractions;
+
+namespace DigitalLibrary.Modules.Lendings.Domain.DomainEvents;
+
+public sealed record PatronLentDomainEvent(
+    Guid LentId,
+    Guid PatronId,
+    DateTime StartDate,
+    DateTime EndDate,
+    DateTime CreatedDate) : IDomainEvent;
