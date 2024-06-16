@@ -8,18 +8,18 @@ namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLen
 internal sealed class PatronLentDomainEventHandler
     : INotificationHandler<PatronLentDomainEvent>
 {
-    private readonly IBus _bus;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public PatronLentDomainEventHandler(IBus bus)
+    public PatronLentDomainEventHandler(IPublishEndpoint publishEndpoint)
     {
-        _bus = bus;
+        _publishEndpoint = publishEndpoint;
     }
 
     public Task Handle(
         PatronLentDomainEvent notification,
         CancellationToken cancellationToken)
     {
-        return _bus.Publish(
+        return _publishEndpoint.Publish(
             new PatronLentIntegrationEvent(
                 notification.PatronId,
                 notification.LentId,

@@ -8,18 +8,18 @@ namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.ConcludeLen
 internal sealed class BookLendCancelledDomainEventHandler
     : INotificationHandler<BookLendCancelledDomainEvent>
 {
-    private readonly IBus _bus;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public BookLendCancelledDomainEventHandler(IBus bus)
+    public BookLendCancelledDomainEventHandler(IPublishEndpoint publishEndpoint)
     {
-        _bus = bus;
+        _publishEndpoint = publishEndpoint;
     }
 
     public Task Handle(
         BookLendCancelledDomainEvent notification,
         CancellationToken cancellationToken)
     {
-        return _bus.Publish(
+        return _publishEndpoint.Publish(
             new LendFinishedIntegrationEvent(notification.BookId),
             cancellationToken);
     }

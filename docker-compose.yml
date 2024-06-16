@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   digital-library.api:
     container_name: digital-library.api
@@ -9,3 +7,13 @@ services:
     ports:
       - "5000:5000"
       - "5001:5001"
+
+  digital-library.mq:
+    container_name: "digital-library.mq"
+    image: rabbitmq:3.11.7-management
+    environment:
+      - RABBIT_DEFAULT_USER=guest
+      - RABBIT_DEFAULT_PASS=guest
+    ports:
+      - '5672:5672'
+      - '15672:15672'

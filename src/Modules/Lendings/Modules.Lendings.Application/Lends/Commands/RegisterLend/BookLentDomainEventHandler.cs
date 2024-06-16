@@ -8,18 +8,18 @@ namespace DigitalLibrary.Modules.Lendings.Application.Lends.Commands.RegisterLen
 internal sealed class BookLentDomainEventHandler
     : INotificationHandler<BookLentDomainEvent>
 {
-    private readonly IBus _bus;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public BookLentDomainEventHandler(IBus bus)
+    public BookLentDomainEventHandler(IPublishEndpoint publishEndpoint)
     {
-        _bus = bus;
+        _publishEndpoint = publishEndpoint;
     }
 
     public Task Handle(
         BookLentDomainEvent notification,
         CancellationToken cancellationToken)
     {
-        return _bus.Publish(
+        return _publishEndpoint.Publish(
             new BookLentIntegrationEvent(
                 notification.LentId,
                 notification.BookId,
