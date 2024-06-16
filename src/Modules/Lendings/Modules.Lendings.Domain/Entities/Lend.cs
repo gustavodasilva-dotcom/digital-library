@@ -7,7 +7,7 @@ namespace DigitalLibrary.Modules.Lendings.Domain.Entities;
 
 public class Lend : Entity
 {
-    private Lend() : base()
+    private Lend()
     {
     }
 

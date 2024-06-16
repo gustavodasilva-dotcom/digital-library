@@ -7,9 +7,10 @@ public class Book : Entity
     private readonly Publisher _publisher;
 
     private readonly HashSet<BookAuthor> _authors = [];
+
     private readonly HashSet<BookLend> _lends = [];
 
-    private Book() : base()
+    private Book()
     {
     }
 
@@ -51,7 +52,7 @@ public class Book : Entity
 
     public Guid PublisherId { get; private set; }
 
-    public Publisher Publisher => _publisher;
+    public virtual Publisher Publisher => _publisher;
 
     public virtual IReadOnlySet<BookAuthor> Authors => _authors;
 

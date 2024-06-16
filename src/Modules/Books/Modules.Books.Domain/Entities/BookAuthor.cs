@@ -9,7 +9,7 @@ public class BookAuthor : Entity
 
     private readonly Author _author;
 
-    private BookAuthor() : base()
+    private BookAuthor()
     {
     }
 
@@ -31,9 +31,9 @@ public class BookAuthor : Entity
 
     public Guid AuthorId { get; private set; }
 
-    public Book Book => _book;
+    public virtual Book Book => _book;
 
-    public Author Author => _author;
+    public virtual Author Author => _author;
 
     public override IEnumerable<object> GetAtomicValues()
     {

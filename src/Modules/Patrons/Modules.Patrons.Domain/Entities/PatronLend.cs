@@ -3,7 +3,7 @@ namespace DigitalLibrary.Modules.Patrons.Domain.Entities;
 
 public class PatronLend : Entity
 {
-    private PatronLend() : base()
+    private PatronLend()
     {
     }
 

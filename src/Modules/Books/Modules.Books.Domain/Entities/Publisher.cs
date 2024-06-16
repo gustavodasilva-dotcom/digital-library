@@ -7,7 +7,7 @@ public class Publisher : Entity
 {
     private readonly HashSet<Book> _books = [];
 
-    private Publisher() : base()
+    private Publisher()
     {
     }
 
@@ -19,7 +19,7 @@ public class Publisher : Entity
 
     public string Name { get; private set; }
 
-    public IReadOnlySet<Book> Books => _books;
+    public virtual IReadOnlySet<Book> Books => _books;
 
     public override IEnumerable<object> GetAtomicValues()
     {

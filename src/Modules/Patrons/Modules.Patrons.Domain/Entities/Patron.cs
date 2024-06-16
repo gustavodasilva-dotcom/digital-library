@@ -8,7 +8,7 @@ public class Patron : Entity
 {
     private readonly HashSet<PatronLend> _lends = [];
 
-    private Patron() : base()
+    private Patron()
     {
     }
 
@@ -37,7 +37,7 @@ public class Patron : Entity
 
     public DateTime Birthday { get; private set; }
 
-    public IReadOnlySet<PatronLend> Lends => _lends;
+    public virtual IReadOnlySet<PatronLend> Lends => _lends;
 
     public override IEnumerable<object> GetAtomicValues()
     {

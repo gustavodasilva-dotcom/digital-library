@@ -2,7 +2,7 @@ namespace DigitalLibrary.Modules.Books.Domain.Entities;
 
 public class BookLend : Entity
 {
-    private BookLend() : base()
+    private BookLend()
     {
     }
 
